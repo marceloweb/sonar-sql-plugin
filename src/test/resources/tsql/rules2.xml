@@ -1,0 +1,201 @@
+<SqlRules>
+	<rule>
+		<key />
+		<name />
+		<internalKey />
+		<descriptionFormat />
+		<description />
+		<severity />
+		<cardinality />
+		<status />
+		<remediationFunction />
+		<remediationFunctionBaseEffort />
+		<debtRemediationFunctionCoefficient />
+		<tag />
+		<ruleImplementation>
+			<names>
+				<textItem>Table_source_itemContext</textItem>
+			</names>
+			<textToFind>
+			</textToFind>
+			<parentRules>
+				<ruleImplementation>
+					<names>
+						<textItem>Join_partContext</textItem>
+						<textItem>Select_statementContext</textItem>
+					</names>
+					<textToFind>
+					</textToFind>
+					<parentRules>
+					</parentRules>
+					<childrenRules>
+
+						<ruleImplementation>
+							<names>
+								<textItem>With_table_hintsContext</textItem>
+							</names>
+							<textToFind>
+							</textToFind>
+							<parentRules>
+							</parentRules>
+							<childrenRules>
+							</childrenRules>
+							<siblingsRules>
+							</siblingsRules>
+							<usesRules>
+							</usesRules>
+							<ruleViolationMessage>HINTS</ruleViolationMessage>
+							<times>0</times>
+							<distance>0</distance>
+							<index>0</index>
+							<indexCheckType>DEFAULT</indexCheckType>
+							<distanceCheckType>DEFAULT</distanceCheckType>
+							<ruleMode />
+							<ruleMatchType>CLASS_ONLY</ruleMatchType>
+							<ruleResultType>FAIL_IF_NOT_FOUND</ruleResultType>
+							<textCheckType>DEFAULT</textCheckType>
+						</ruleImplementation>
+					</childrenRules>
+					<siblingsRules>
+					</siblingsRules>
+					<usesRules>
+					</usesRules>
+					<ruleViolationMessage>MAINSELECTS</ruleViolationMessage>
+					<times>0</times>
+					<distance>0</distance>
+					<index>0</index>
+					<indexCheckType>DEFAULT</indexCheckType>
+					<distanceCheckType>DEFAULT</distanceCheckType>
+					<ruleMode />
+					<ruleMatchType>CLASS_ONLY</ruleMatchType>
+					<ruleResultType>SKIP_IF_NOT_FOUND</ruleResultType>
+					<textCheckType>DEFAULT</textCheckType>
+					<violatingRulesCodeExamples>
+						<ruleCodeExample />
+					</violatingRulesCodeExamples>
+					<compliantRulesCodeExamples>
+						<ruleCodeExample />
+					</compliantRulesCodeExamples>
+				</ruleImplementation>
+			</parentRules>
+			<childrenRules>
+			</childrenRules>
+			<siblingsRules>
+			</siblingsRules>
+			<usesRules>
+
+				<ruleImplementation>
+					<names>
+						<textItem>IdContext</textItem>
+					</names>
+					<textToFind>
+					</textToFind>
+					<parentRules>
+
+						<ruleImplementation>
+							<names>
+								<textItem>Common_table_expressionContext</textItem>
+							</names>
+							<textToFind>
+							</textToFind>
+							<parentRules>
+							</parentRules>
+							<childrenRules>
+							</childrenRules>
+							<siblingsRules>
+							</siblingsRules>
+							<usesRules>
+							</usesRules>
+							<ruleViolationMessage>CTE</ruleViolationMessage>
+							<times>0</times>
+							<distance>1</distance>
+							<index>0</index>
+							<indexCheckType>DEFAULT</indexCheckType>
+							<distanceCheckType>EQUALS</distanceCheckType>
+							<ruleMode />
+							<ruleMatchType>DEFAULT</ruleMatchType>
+							<ruleResultType>SKIP_IF_FOUND</ruleResultType>
+							<textCheckType>DEFAULT</textCheckType>
+						</ruleImplementation>
+
+					</parentRules>
+					<childrenRules>
+					</childrenRules>
+					<siblingsRules>
+					</siblingsRules>
+					<usesRules>
+					</usesRules>
+					<ruleViolationMessage>ID</ruleViolationMessage>
+					<times>0</times>
+					<distance>0</distance>
+					<index>0</index>
+					<indexCheckType>DEFAULT</indexCheckType>
+					<distanceCheckType>DEFAULT</distanceCheckType>
+					<ruleMode />
+					<ruleMatchType>FULL</ruleMatchType>
+					<ruleResultType>DEFAULT</ruleResultType>
+					<textCheckType>DEFAULT</textCheckType>
+				</ruleImplementation>
+			</usesRules>
+			<ruleViolationMessage>MAIN</ruleViolationMessage>
+			<times>0</times>
+			<distance>0</distance>
+			<index>0</index>
+			<indexCheckType>DEFAULT</indexCheckType>
+			<distanceCheckType>DEFAULT</distanceCheckType>
+			<ruleMode />
+			<ruleMatchType>CLASS_ONLY</ruleMatchType>
+			<ruleResultType>DEFAULT</ruleResultType>
+			<textCheckType>DEFAULT</textCheckType>
+			<violatingRulesCodeExamples>
+				<ruleCodeExample><![CDATA[
+				;With CTE As
+(
+	Select PK_FileType
+	From dbo.FileType 
+)
+Select PK_FileType From CTE
+				]]>
+				 </ruleCodeExample>
+				 	<ruleCodeExample><![CDATA[
+
+Update dbo.FileType
+Set PK_FileType = 1
+From dbo.FileType F 
+	Inner Join dbo.FileAddress A 
+		On F.PK_FileType = A.PK_FileType
+				]]>
+				 </ruleCodeExample>
+				 	 
+			</violatingRulesCodeExamples>
+			<compliantRulesCodeExamples>
+					<ruleCodeExample><![CDATA[
+				;With CTE As
+(
+	Select PK_FileType
+	From dbo.FileType   With (NoLock)
+)
+Select PK_FileType From CTE
+				]]>
+				 </ruleCodeExample>
+				 
+				<ruleCodeExample><![CDATA[
+				Update F
+Set PK_FileType = 1
+From dbo.FileType F 
+	Inner Join dbo.FileAddress A  With (NoLock)
+		On F.PK_FileType = A.PK_FileType
+				]]>
+				 </ruleCodeExample>
+			</compliantRulesCodeExamples>
+		</ruleImplementation>
+		<source />
+		<ruleType>CODE_SMELL</ruleType>
+	</rule>
+	<repoName />
+	<repoKey />
+	<version>1</version>
+	<isAdhoc>false</isAdhoc>
+	<isExternal>false</isExternal>
+	<dialect>tsql</dialect>
+</SqlRules>
