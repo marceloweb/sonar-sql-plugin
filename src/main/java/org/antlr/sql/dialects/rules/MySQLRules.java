@@ -42,14 +42,14 @@ public enum MySQLRules {
 			customRules.setRepoName("SQL Plugin ABI");
 			customRules.setDialect(Dialects.MYSQL.name());
 			customRules.getRule()
-					.addAll(Arrays.asList(getWaitForRule(), getSelectAllRule(), getInsertRule(), getOrderByRule()));
+					.addAll(Arrays.asList(getTablesPartitionRule(), getSelectAllRule(), getInsertRule(), getOrderByRule()));
 			rules.add(customRules);
 		}
 		return rules;
 	}
 
-	protected Rule getWaitForRule() {
-		Rule rule = baseRules.getWaitForRule();
+	protected Rule getTablesPartitionRule() {
+		Rule rule = baseRules.getTablesPartitionRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 		impl.getNames().getTextItem().add(ScalarFunctionNameContext.class.getSimpleName());
 		impl.getTextToFind().getTextItem().add("SLEEP");

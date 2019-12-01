@@ -4,7 +4,7 @@ import org.sonar.plugins.sql.models.rules.Rule;
 
 public interface IBaseRules {
 
-	Rule getWaitForRule();
+	Rule getTablesPartitionRule();
 
 	Rule getSelectAllRule();
 

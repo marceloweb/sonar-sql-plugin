@@ -38,15 +38,15 @@ public enum PSSQLRules {
 			customRules.setRepoName("SQL Plugin checks");
 			customRules.setDialect(Dialects.PSSQL.name());
 			customRules.getRule()
-					.addAll(Arrays.asList(getWaitForRule(),
+					.addAll(Arrays.asList(getTablesPartitionRule(),
 							/* getSelectAllRule(), */ /* getInsertRule(), */ getOrderByRule()));
 			rules.add(customRules);
 		}
 		return rules;
 	}
 
-	protected Rule getWaitForRule() {
-		Rule rule = baseRules.getWaitForRule();
+	protected Rule getTablesPartitionRule() {
+		Rule rule = baseRules.getTablesPartitionRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 		impl.getNames().getTextItem().add(Func_callContext.class.getSimpleName());
 		impl.getTextToFind().getTextItem().add("PG_SLEEP");

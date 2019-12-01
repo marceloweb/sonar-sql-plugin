@@ -17,20 +17,20 @@ public enum BaseRules implements IBaseRules {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.antlr.sql.dialects.rules.IBaseRules#getWaitForRule()
+	 * @see org.antlr.sql.dialects.rules.IBaseRules#getTablesPartitionRule()
 	 */
 	@Override
-	public Rule getWaitForRule() {
+	public Rule getTablesPartitionRule() {
 		Rule rule = new Rule();
 		rule.setKey("C001");
 		rule.setInternalKey("C001");
-		rule.setName("THE TABLE PARTITIONS PATTERN was used");
-		rule.setDescription("THE TABLE PARTITIONS PATTERN was used");
+		rule.setName("THE TABLES PARTITION PATTERN was used");
+		rule.setDescription("THE TABLES PARTITION PATTERN was used");
 		rule.setTag("performance");
 		rule.setSeverity("MINOR");
 		rule.setRemediationFunction("LINEAR");
 		rule.setDebtRemediationFunctionCoefficient("2min");
-		rule.getRuleImplementation().setRuleViolationMessage("THE TABLE PARTITIONS PATTERN was used.");
+		rule.getRuleImplementation().setRuleViolationMessage("THE TABLES PARTITION PATTERN was used.");
 
 		return rule;
 	}
@@ -38,15 +38,15 @@ public enum BaseRules implements IBaseRules {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.antlr.sql.dialects.rules.IBaseRules#getTableNamesRule()
+	 * @see org.antlr.sql.dialects.rules.IBaseRules#getTablesNameRule()
 	 */
 	@Override
-	public Rule getTableNamesRule() {
+	public Rule getTablesNameRule() {
 		Rule rule = new Rule();
 		rule.setKey("C002");
 		rule.setInternalKey("C002");
-		rule.setName("THE TABLE NAMES PATTERN was used");
-		rule.setDescription("THE TABLE NAMES PATTERN was used");
+		rule.setName("THE TABLES NAME PATTERN was used");
+		rule.setDescription("THE TABLES NAME PATTERN was used");
 		rule.setTag("best-practise");
 		rule.setSeverity("MINOR");
 		rule.setRemediationFunction("LINEAR");

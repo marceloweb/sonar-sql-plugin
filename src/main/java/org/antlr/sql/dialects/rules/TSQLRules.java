@@ -51,15 +51,15 @@ public enum TSQLRules {
 			customRules.setRepoName("SQL Plugin checks");
 			customRules.setDialect(Dialects.TSQL.name());
 			customRules.getRule()
-					.addAll(Arrays.asList(getWaitForRule(), getSelectAllRule(), getInsertRule(), getOrderByRule(),
+					.addAll(Arrays.asList(getTablesPartitionRule(), getSelectAllRule(), getInsertRule(), getOrderByRule(),
 							getExecRule(), getNoLockRule()));
 			rules.add(customRules);
 		}
 		return rules;
 	}
 
-	protected Rule getWaitForRule() {
-		Rule rule = baseRules.getWaitForRule();
+	protected Rule getTablesPartitionRule() {
+		Rule rule = baseRules.getTablesPartitionRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 		impl.getNames().getTextItem().add(Waitfor_statementContext.class.getSimpleName());
 
