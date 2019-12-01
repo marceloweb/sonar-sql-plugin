@@ -39,7 +39,7 @@ public enum PSSQLRules {
 			customRules.setDialect(Dialects.PSSQL.name());
 			customRules.getRule()
 					.addAll(Arrays.asList(getTablesPartitionRule(),
-							/* getSelectAllRule(), */ /* getInsertRule(), */ getOrderByRule()));
+							getTablesNameRule(),  /* getInsertRule(), */ getDatabaseNameRule()));
 			rules.add(customRules);
 		}
 		return rules;
@@ -59,8 +59,8 @@ public enum PSSQLRules {
 		return rule;
 	}
 
-	protected Rule getSelectAllRule() {
-		Rule rule = baseRules.getSelectAllRule();
+	protected Rule getTablesNameRule() {
+		Rule rule = baseRules.getTablesNameRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 
 		impl.getNames().getTextItem().add(ExprContext.class.getSimpleName());
@@ -80,26 +80,8 @@ public enum PSSQLRules {
 		return rule;
 	}
 
-	protected Rule getInsertRule() {
-		Rule rule = baseRules.getInsertRule();
-		RuleImplementation impl = rule.getRuleImplementation();
-
-		RuleImplementation child2 = new RuleImplementation();
-		child2.getNames().getTextItem().add(UidListContext.class.getSimpleName());
-		child2.setTextCheckType(TextCheckType.DEFAULT);
-		child2.setRuleResultType(RuleResultType.FAIL_IF_NOT_FOUND);
-		child2.setRuleMatchType(RuleMatchType.CLASS_ONLY);
-
-		impl.getChildrenRules().getRuleImplementation().add(child2);
-		impl.getNames().getTextItem().add(InsertStatementContext.class.getSimpleName());
-		impl.setRuleMatchType(RuleMatchType.CLASS_ONLY);
-		impl.setRuleResultType(RuleResultType.DEFAULT);
-
-		return rule;
-	}
-
-	protected Rule getOrderByRule() {
-		Rule rule = baseRules.getOrderByRule();
+	protected Rule getDatabaseNameRule() {
+		Rule rule = baseRules.getDatabaseNameRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 
 		RuleImplementation child2 = new RuleImplementation();

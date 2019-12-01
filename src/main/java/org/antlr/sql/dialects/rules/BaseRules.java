@@ -63,40 +63,15 @@ public enum BaseRules implements IBaseRules {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.antlr.sql.dialects.rules.IBaseRules#getInsertRule()
-	 */
-	@Override
-	public Rule getHiveTableNamesRule() {
-		Rule rule = new Rule();
-		rule.setKey("C003");
-		rule.setInternalKey("C003");
-		rule.setName("THE HIVE TABLE NAMES PATTERN was used");
-		rule.setDescription("THE HIVE TABLE NAMES PATTERN was used");
-		rule.setTag("design");
-		rule.setSeverity("MINOR");
-		rule.setRemediationFunction("LINEAR");
-		rule.setDebtRemediationFunctionCoefficient("2min");
-		RuleImplementation impl = new RuleImplementation();
-		impl.setRuleViolationMessage("Column list is not specified in an INSERT statement.");
-		impl.getViolatingRulesCodeExamples().getRuleCodeExample().add("INSERT INTO dbo.test VALUES (1,2);");
-		impl.getCompliantRulesCodeExamples().getRuleCodeExample().add("INSERT INTO dbo.test (a,b) VALUES (1,2);");
-		rule.setRuleImplementation(impl);
-
-		return rule;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see org.antlr.sql.dialects.rules.IBaseRules#getOrderByRule()
 	 */
 	@Override
-	public Rule getOrderByRule() {
+	public Rule getDatabaseNameRule() {
 		Rule rule = new Rule();
-		rule.setKey("C004");
-		rule.setInternalKey("C004");
-		rule.setName("THE HIVE DATABASE NAME PATTERN was used");
-		rule.setDescription("THE HIVE DATABASE NAME PATTERN was used");
+		rule.setKey("C003");
+		rule.setInternalKey("C003");
+		rule.setName("THE DATABASE NAME PATTERN was used");
+		rule.setDescription("THE DATABASE NAME PATTERN was used");
 		rule.setTag("best-practise");
 		rule.setSeverity("MINOR");
 		rule.setRemediationFunction("LINEAR");

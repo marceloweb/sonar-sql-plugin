@@ -6,11 +6,9 @@ public interface IBaseRules {
 
 	Rule getTablesPartitionRule();
 
-	Rule getSelectAllRule();
+	Rule getTablesNameRule();
 
-	Rule getInsertRule();
-
-	Rule getOrderByRule();
+	Rule getDatabaseNameRule();
 
 	Rule getExecRule();
 

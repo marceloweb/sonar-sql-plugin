@@ -42,7 +42,7 @@ public enum MySQLRules {
 			customRules.setRepoName("SQL Plugin ABI");
 			customRules.setDialect(Dialects.MYSQL.name());
 			customRules.getRule()
-					.addAll(Arrays.asList(getTablesPartitionRule(), getSelectAllRule(), getInsertRule(), getOrderByRule()));
+					.addAll(Arrays.asList(getTablesPartitionRule(), getTablesNameRule(), getDatabaseNameRule()));
 			rules.add(customRules);
 		}
 		return rules;
@@ -62,8 +62,8 @@ public enum MySQLRules {
 		return rule;
 	}
 
-	protected Rule getSelectAllRule() {
-		Rule rule = baseRules.getSelectAllRule();
+	protected Rule getTablesNameRule() {
+		Rule rule = baseRules.getTablesNameRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 		impl.getNames().getTextItem().add(SelectStarElementContext.class.getSimpleName());
 		impl.getTextToFind().getTextItem().add("*");
@@ -74,24 +74,8 @@ public enum MySQLRules {
 		return rule;
 	}
 
-	protected Rule getInsertRule() {
-		Rule rule = baseRules.getInsertRule();
-		RuleImplementation impl = rule.getRuleImplementation();
-		RuleImplementation child2 = new RuleImplementation();
-		child2.getNames().getTextItem().add(UidListContext.class.getSimpleName());
-		child2.setTextCheckType(TextCheckType.DEFAULT);
-		child2.setRuleResultType(RuleResultType.FAIL_IF_NOT_FOUND);
-		child2.setRuleMatchType(RuleMatchType.CLASS_ONLY);
-		impl.getChildrenRules().getRuleImplementation().add(child2);
-		impl.getNames().getTextItem().add(InsertStatementContext.class.getSimpleName());
-		impl.setRuleMatchType(RuleMatchType.CLASS_ONLY);
-		impl.setRuleResultType(RuleResultType.DEFAULT);
-
-		return rule;
-	}
-
-	protected Rule getOrderByRule() {
-		Rule rule = baseRules.getOrderByRule();
+	protected Rule getDatabaseNameRule() {
+		Rule rule = baseRules.getDatabaseNameRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 		RuleImplementation child2 = new RuleImplementation();
 		child2.getNames().getTextItem().add(OrderByExpressionContext.class.getSimpleName());

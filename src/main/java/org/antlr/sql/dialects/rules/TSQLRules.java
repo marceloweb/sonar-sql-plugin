@@ -51,7 +51,7 @@ public enum TSQLRules {
 			customRules.setRepoName("SQL Plugin checks");
 			customRules.setDialect(Dialects.TSQL.name());
 			customRules.getRule()
-					.addAll(Arrays.asList(getTablesPartitionRule(), getSelectAllRule(), getInsertRule(), getOrderByRule(),
+					.addAll(Arrays.asList(getTablesPartitionRule(), getTablesNameRule(), getDatabaseNameRule(),
 							getExecRule(), getNoLockRule()));
 			rules.add(customRules);
 		}
@@ -71,8 +71,8 @@ public enum TSQLRules {
 		return rule;
 	}
 
-	protected Rule getSelectAllRule() {
-		Rule rule = baseRules.getSelectAllRule();
+	protected Rule getTablesNameRule() {
+		Rule rule = baseRules.getTablesNameRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 
 		impl.getNames().getTextItem().add(Select_list_elemContext.class.getSimpleName());
@@ -104,26 +104,8 @@ public enum TSQLRules {
 		return rule;
 	}
 
-	protected Rule getInsertRule() {
-		Rule rule = baseRules.getInsertRule();
-		RuleImplementation impl = rule.getRuleImplementation();
-
-		RuleImplementation child2 = new RuleImplementation();
-		child2.getNames().getTextItem().add(Column_name_listContext.class.getSimpleName());
-		child2.setTextCheckType(TextCheckType.DEFAULT);
-		child2.setRuleResultType(RuleResultType.FAIL_IF_NOT_FOUND);
-		child2.setRuleMatchType(RuleMatchType.CLASS_ONLY);
-
-		impl.getChildrenRules().getRuleImplementation().add(child2);
-		impl.getNames().getTextItem().add(Insert_statementContext.class.getSimpleName());
-		impl.setRuleMatchType(RuleMatchType.CLASS_ONLY);
-		impl.setRuleResultType(RuleResultType.DEFAULT);
-
-		return rule;
-	}
-
-	protected Rule getOrderByRule() {
-		Rule rule = baseRules.getOrderByRule();
+	protected Rule getDatabaseNameRule() {
+		Rule rule = baseRules.getDatabaseNameRule();
 		RuleImplementation impl = rule.getRuleImplementation();
 
 		RuleImplementation child2 = new RuleImplementation();
